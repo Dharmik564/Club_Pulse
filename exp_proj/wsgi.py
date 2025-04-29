@@ -14,3 +14,7 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'exp_proj.settings')
 
 application = get_wsgi_application()
+# Add WhiteNoise middleware to serve static files
+from whitenoise import WhiteNoise
+
+application = WhiteNoise(application)
