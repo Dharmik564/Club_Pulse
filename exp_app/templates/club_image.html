@@ -11,9 +11,9 @@
             <div class="mb-3">
                 <label class="fw-bold">Select Club:</label>
                 <select class="form-select" name="clubs" id="clubs">
-                    {% for club in club %}
                     <option value="" selected disabled>Select Club</option>
-                    <option value="{{ club.id }}">{{ club.club_name }}</option>
+                    {% for club in club %}
+                        <option value="{{ club.id }}">{{ club.club_name }}</option>
                     {% endfor %}
                 </select>
             </div>
