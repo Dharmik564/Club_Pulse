@@ -127,6 +127,10 @@ STATIC_URL = '/static/'
 STATIC_URL = '/exp_app/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Add this line
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+    ]
+
 
 #sending email 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
