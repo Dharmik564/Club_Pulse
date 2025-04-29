@@ -54,7 +54,7 @@
                             <span></span>
                         </div><!-- .hamburger-menu -->
 
-                        <ul>
+                        <!-- <ul>
                             <li><a href="{% url 'user_home' id %}">Home</a></li>
                             <li><a href="{% url 'about' id %}">About</a></li>
                             <li><a href="{% url 'club_list' id 'all' %}">Clubs</a></li>
@@ -68,7 +68,33 @@
                             {% else %}
                                 <li><a href="{% url 'user_login' %}">Contact</a></li>
                             {% endif %}
+                        </ul> -->
+                        <ul>
+                            <li><a href="{% url 'user_home' id %}">Home</a></li>
+                            <li><a href="{% url 'about' id %}">About</a></li>
+                            <li><a href="{% url 'club_list' id 'all' %}">Clubs</a></li>
+                        
+                            {% if id != 0 %}
+                                <li><a href="{% url 'my_history' id %}">My History</a></li>
+                                <li><a href="{% url 'contact' id %}">Contact</a></li>
+                            {% else %}
+                                <li><a href="{% url 'user_login' %}">My History</a></li>
+                                <li><a href="{% url 'user_login' %}">Contact</a></li>
+                            {% endif %}
+                        
+                            <!-- MOBILE LOGIN/LOGOUT -->
+                            <li class="d-lg-none">
+                                {% if id != 0 %}
+                                    <img src="{{ profile_image.url }}" alt="Profile Image" width="50" height="50" class="rounded-circle">
+                                    <a href="" style="color: aqua;">{{ username }}</a>
+                                    <a href="{% url 'main_page' %}">Logout</a>
+                                {% else %}
+                                    <a href="{% url 'login' %}">Login</a>
+                                {% endif %}
+                            </li>
                         </ul>
+                        
+                        
                     </nav><!-- .site-navigation -->
                 </div><!-- .col -->
 

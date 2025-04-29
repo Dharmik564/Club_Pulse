@@ -177,6 +177,14 @@ a:hover, a:active {
     cursor: pointer;
 }
 
+.hamburger-menu ul li .btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+}
+
+
 .hamburger-menu span {
     display: block;
     position: absolute;

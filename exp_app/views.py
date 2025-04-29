@@ -149,6 +149,7 @@ def Add_new_club(request, owner_id):
     mobile_number = data.mobile_number
     name = data.name
     club_list = models.Club_Detail.objects.filter(club_owner_email = email)
+    length_club = len(club_list)
     context = {
         'id' : id,
         'email' : email,
@@ -157,6 +158,7 @@ def Add_new_club(request, owner_id):
         'name' : name,
         'profile_image' : profile_image,
         'club' : club_list,
+        'length_club' : length_club
     }
     if request.method == 'POST':
         club_name = request.POST.get('club_name')
@@ -220,6 +222,7 @@ def Edit_club(request, owner_id):
     mobile_number = data.mobile_number
     name = data.name
     club_list = models.Club_Detail.objects.filter(club_owner_email = email)
+    length_club = len(club_list)
     context = {
         'id' : id,
         'email' : email,
@@ -229,6 +232,7 @@ def Edit_club(request, owner_id):
         'mobile_number' : mobile_number,
         'profile_image' : profile_image,
         'club' : club_list,
+        'length_club' : length_club
     }
     if request.method == 'POST':
         club_id = request.POST.get('club_id')
@@ -272,6 +276,7 @@ def Delete_club(request, owner_id):
     mobile_number = data.mobile_number
     name = data.name
     club_list = models.Club_Detail.objects.filter(club_owner_email = email)
+    length_club = len(club_list)
     context = {
         'id' : id,
         'email' : email,
@@ -280,6 +285,7 @@ def Delete_club(request, owner_id):
         'name' : name,
         'profile_image' : profile_image,
         'club' : club_list,
+        'length_club' : length_club
     }
     if request.method == 'POST':
         club_email = request.POST.get('club_email')
@@ -305,6 +311,7 @@ def Add_club_image(request, owner_id):
     name = data.name
     club_list = models.Club_Detail.objects.filter(club_owner_email = email)
     club_image_stored = None
+    lenght_club = len(club_list)
     for i in club_list:
         if models.Club_Image.objects.filter(club_id = i.id):
             if club_image_stored == None:
@@ -323,6 +330,7 @@ def Add_club_image(request, owner_id):
         'profile_image' : profile_image,
         'club' : club_list,
         'club_image_stored' : club_image_stored,
+        'length_club' : lenght_club
     }
     if request.method == 'POST':
         club_image = request.FILES.getlist('club_images')
@@ -344,6 +352,7 @@ def Delete_club_image(request, owner_id):
     name = data.name
     club_list = models.Club_Detail.objects.filter(club_owner_email = email)
     club_image_stored = None
+    lenght_club = len(club_list)
     for i in club_list:
         if models.Club_Image.objects.filter(club_id = i.id):
             if club_image_stored == None:
@@ -364,6 +373,7 @@ def Delete_club_image(request, owner_id):
         'profile_image' : profile_image,
         'club' : club_list,
         'club_image_stored' : club_image_stored,
+        'length_club' : lenght_club
     }
     if request.method == 'POST':
         clubs = request.POST.get('clubs')

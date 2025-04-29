@@ -37,7 +37,7 @@
         }
 
         .navbar a {
-            color: #745f39; /* White text */
+            color: #2C3E50; /* White text */
             background-color: rgb(207, 198, 179);
             text-decoration: none;
             transition: 0.3s;
@@ -278,6 +278,12 @@
         .hidden {
             display: none;
         }
+
+        .navbar-toggler {
+            background-color: white; /* or black depending on navbar background */
+            border: none;
+        }
+
         
         </style>
 
@@ -332,6 +338,14 @@
                 <span class="ms-2 fs-6 fw-bold text-dark">{{ username }}</span>
                 <a class="btn btn-logout" href="{% url 'login' %}" style=" margin-left: 10px;">Logout</a>
             </div>
+
+            <!-- Profile section for mobile -->
+            <div class="mobile-profile text-center mt-3">
+                <img src="{{ profile_image.url }}" alt="Profile Image" width="50" height="50" class="rounded-circle mb-2">
+                <div class="fs-6 fw-bold text-dark">{{ username }}</div>
+                <a class="btn btn-logout mt-2" href="{% url 'login' %}">Logout</a>
+            </div>
+
         </div>
     </nav>
     
