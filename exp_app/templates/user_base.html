@@ -1,0 +1,385 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMS User</title>
+    <style>
+        body {
+            background-color: #f0f8ff; /* Light background color */
+            color: #333333; /* Dark gray text color */
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+        }
+
+        p, label, input, textarea {
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: darkcyan; /* Header color */
+        }
+        
+        .navbar {
+            height: 70px;
+            display: flex; 
+            flex-direction: row;
+            position: fixed;
+            background: #2C3E50;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .navbar a {
+            color: #745f39; /* White text */
+            background-color: rgb(209, 204, 194);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .navbar a:hover {
+            background: rgb(194, 51, 187); /* Teal hover effect */
+            border-radius: 5px;
+        }
+
+        .navbar-brand {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .navbar-toggler {
+            background-color: #020100; /* White toggler for mobile */
+        }
+
+        .box {
+            height: 70px;
+            display: flex; 
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .box1 {
+            margin-top: 20px;
+            background: transparent;
+        }
+
+
+        
+        .club_list_details {
+            display: flex; 
+            flex-direction: column; 
+            padding: 20px;
+            border: 2px solid rgb(236, 223, 195);
+            border-collapse: collapse;
+            border-left: none;
+            border-right: none;
+        }
+
+        .clubs_memloc {
+            display: flex;
+            flex-direction: column;
+            font-weight: bold;
+            width: 50%;
+        }
+
+        .club_descr {
+            padding: 5px;
+            
+        }
+
+        a {
+            color: aqua; /* Link color */
+        }
+
+        input[type=text] {
+            padding: 6px;
+            margin-top: 8px;
+            font-size: 17px;
+            border: none;
+            border: 1px solid #ccc;
+        }
+
+        button{
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+
+        }
+
+
+        button[type=button] {
+            background: transparent; 
+            border: none; 
+            padding: 0px; 
+            width: 50px;
+            display: flex;
+            border-radius: 2px;
+            flex-direction: column;
+            justify-content: center;
+            align-content: center;
+        }
+
+        .inquiry_button{
+            background-color: #ffe4c454;
+            border: 2px solid #ffe4c4;
+            text-decoration: none;
+            color: #020100;
+            padding: 5px;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .inquiry_button:hover {
+            background-color: #885407;
+            text-decoration: none;
+            border: 2px solid transparent;
+        }
+
+        .search-container button {
+            float: right;
+            padding: 6px;
+            margin-top: 8px;
+            margin-right: 16px;
+            background: #ddd;
+            font-size: 17px;
+            border: none;
+            cursor: pointer;
+            
+            border-radius: 15px;
+            }
+
+        .search-container button:hover {
+            background: #ccc;
+            font-size: large;
+            }
+
+        .img_club_list {
+            border-radius: 50%;
+        }
+       
+        .box-image{
+            display: flex; 
+            flex-direction: column;
+            gap: 5px; 
+        }
+
+        .box-ser{
+            display: flex; 
+            flex-direction: column;
+            gap: 5px; 
+            border: 2px solid rgb(236, 223, 195);
+            margin: 20px; 
+            border-radius: 20px;
+        }                                        
+
+        .rating {
+            background-color: rgb(236, 223, 195);
+            color: #333333;
+            text-align: center;
+            padding: 5px;
+            margin: 20px 90px 20px 90px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-evenly;
+            font-family: cursive;
+        }
+
+        .our_serv {
+            width : 60%; 
+            padding-left: 40px;
+            font-family: 'Georgia', serif; 
+            color: #2F4030;
+            
+        }
+
+        .link {
+            text-decoration: none;
+            color: black;
+            border-radius: 3px;
+            padding: 2px;  
+        }
+
+        .our_service_button {
+            border: 1px solid rgb(236, 223, 195);
+            border-radius: 5px;
+            padding: 5px;
+            margin-top: 10px;
+        }
+
+        .our_service_button:hover {
+            border: 1px solid rgb(236, 223, 195);
+            background-color: rgb(236, 223, 195);
+        }
+
+        .link:hover {
+            border: 1px solid rgb(236, 223, 195);
+            background-color: rgb(236, 223, 195);
+        }
+
+        input[type=text] {
+            padding: 6px;
+            margin-top: 8px;
+            font-size: 17px;
+            border: none;
+            border: 1px solid #ccc;
+        }
+
+        .img_our_service{
+            border-radius: 20px;
+            transition-duration: 1s;
+            border: 10px solid rgb(223, 203, 160);
+        }
+
+        .img_our_service:hover {
+            transform:  scale(1.1);
+            transition-duration: 0.5s;
+        }
+        
+        .img_our_service:hover::after {
+            transform:  scale(1.1);
+            transition-duration: 0.5s;
+        }
+        .contact_input{
+            padding: 14px !important;
+            border: 2px solid antiquewhite !important;
+            border-radius: 25px !important;
+            width: 40vh;
+        }
+
+        
+        .contact_label{
+            padding-left: 15px;
+            padding: 5px;
+            font-weight: bold;
+        }
+
+
+
+        @media only screen and (max-width: 600px) {
+            .our_serv {
+                width: 100%;
+                padding-left: 2px;
+                font-family: 'Georgia', serif; 
+                color: #2F4030;
+            }
+
+            .user_home_image {
+                height: 300px;
+            }
+
+        }
+
+        .custom-bg {
+            background-color: rgb(235, 233, 228); /* Dark gray */
+            
+        }
+
+        .nav-link.active {
+            background-color: rgb(235, 233, 228) !important;  
+        }
+
+        @media (max-width: 775px) {
+            .desktop-profile {
+                display: none; /* Hide profile image and login button on larger screens */
+            }
+            .mobile-profile {
+                display: flex !important; /* Show inside the collapsed menu */
+                flex-direction: column;
+                align-items: center;
+                padding: 10px;
+            }
+        }
+        @media (min-width: 776px) {
+            .mobile-profile {
+                display: none; /* Hide mobile profile on large screens */
+            }
+        }
+
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+<!-- Bootstrap JS (for navbar toggling) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body style="width: 100%; margin: 0%;">
+    <nav class="navbar navbar-expand-lg" style="background-color: rgb(209, 204, 194); position: fixed; width: 100%; padding: 5px 50px;">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <img src="{% static '/clubpulse_logo1.png' %}" class="navbar-brand d-flex align-items-center" width="70px" height="70px" alt="CMS Logo" style="border-radius: 25%;">
+            <!-- Bootstrap Toggle Button (for small screens) -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <!-- Navigation Links -->
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav gap-5">  
+                    <li class="nav-item">
+                        <a class="nav-link link {% if 'user_home' in request.path %}active{% endif %}" href="{% url 'user_home' id %}">Home</a>
+                    </li>
+    
+                    <li class="nav-item">
+                        <a class="nav-link link {% if 'club_list' in request.path %}active{% endif %}" href="{% url 'club_list' id 'all' %}">Clubs List</a>
+                    </li>
+    
+                    <li class="nav-item">
+                        {% if id != 0 %}
+                        <a class="nav-link link {% if 'my_history' in request.path %}active{% endif %}" href="{% url 'my_history' id %}">My History</a>
+                        {% else %}
+                        <a class="nav-link link" href="{% url 'user_login' %}">My History</a>
+                        {% endif %}
+                    </li>
+    
+                    <li class="nav-item">
+                        <a class="nav-link link {% if 'about' in request.path %}active{% endif %}" href="{% url 'about' id %}">About</a>
+                    </li>
+    
+                    <li class="nav-item">
+                        {% if id != 0 %}
+                        <a class="nav-link link {% if 'contact' in request.path %}active{% endif %}" href="{% url 'contact' id %}">Contact</a>
+                        {% else %}
+                        <a class="nav-link link" href="{% url 'user_login' %}">Contact</a>
+                        {% endif %}
+                    </li>
+                </ul>
+                
+            </div>
+                <!-- Profile for large screens -->
+                <div class="desktop-profile d-flex align-items-center ms-lg-3">
+                    {% if id != 0 %}
+                        <img src="{{ profile_image.url }}" alt="Profile Image" width="50" height="50" class="rounded-circle">
+                        <span class="ms-2 fs-6 fw-bold text-dark">{{ username }}</span>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="btn btn-outline-dark">Log In</a>
+                    {% endif %}
+                </div>
+            
+           
+        </div>
+    </nav>
+    
+    <!-- Spacer to prevent content from being hidden under the fixed navbar -->
+    <div style="height: 70px;"></div>
+    
+    {% block content %}
+
+    {% endblock %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

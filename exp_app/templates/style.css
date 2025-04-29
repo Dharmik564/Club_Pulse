@@ -1,0 +1,28 @@
+.box{
+    height: 70px;
+    display: flex; 
+    flex-direction: column;
+    gap: 5px;
+}
+.box1{
+    background-color: rgb(16, 81, 167);
+    padding: 18px;
+    border-radius: 20px;
+    margin: 18px;
+    padding: 4px;
+}
+
+table,td,th{
+    border: 2px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+}
+td{
+    border: 2px solid black;
+    border-collapse: collapse;
+    padding: 5px 500px 5px 50px;
+    /* margin: 5px 40px 5px 4px;  */
+}
+tr:nth-child(even){
+    background-color: lightgray;
+}

@@ -1,0 +1,79 @@
+{% extends "user_base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Responsive Hero Image -->
+<img class="user_home_image img-fluid" src="{% static 'gift_city_club_1.png' %}" alt="error" style="width: 100%; max-height: 500px; object-fit: cover;">
+
+
+<!-- Welcome Text Section -->
+<div class="container text-center py-4">
+    <h3 class="text-uppercase" style="letter-spacing: 2px; font-weight: normal;">WELCOME TO</h3>
+    <!-- Use responsive font-size classes -->
+    <h1 class="fw-bold" style="font-family: 'Cursive', serif; font-size: 28px; color: #2F4030;" class="fs-1 fs-md-2 fs-lg-3">
+        Club Pulse
+    </h1>
+    <p class="lead text-muted text-justify">
+        We are delighted to welcome you to a space where organization meets community! 
+        Manage your club activities, stay updated on events, and collaborate with members seamlessly. 
+        Whether you're planning an event, managing memberships, or staying connected, we've got you covered. 
+        Let’s create unforgettable experiences together!
+    </p>
+</div>
+
+<!-- Rating Section -->
+<div class="container my-4">
+    <div class="row text-center" style="background-color: rgb(235, 233, 228); border-radius: 10px;">
+        <div class="col-6 col-md-3">
+            <p class="fw-bold fs-4">1000</p>
+            <p>Members</p>
+        </div>
+        <div class="col-6 col-md-3">
+            <p class="fw-bold fs-4">1000</p>
+            <p>Clubs</p>
+        </div>
+        <div class="col-6 col-md-3">
+            <p class="fw-bold fs-4">1000</p>
+            <p>Events</p>
+        </div>
+        <div class="col-6 col-md-3">
+            <p class="fw-bold fs-4">1000</p>
+            <p>Happy Customers</p>
+        </div>
+    </div>
+</div>
+
+<!-- Services Section -->
+<div class="container my-5 p-4 custom-bg text-center rounded">
+<img src="{% static 'clubpulse_logo1.png' %}" alt="error" width="150px" class="mb-3">
+
+    <h5>Welcome to Your Ultimate Club Experience!</h5>
+    <p class="text-muted">
+        We offer three exciting types of clubs tailored to match your interests and lifestyle. Whether you're looking for 
+        the adrenaline of Sports Clubs, the vibrant energy of Party/Events/Functions Clubs, or a perfect combination with our 
+        Mixed Clubs, we have something for everyone.
+    </p>
+
+    <!-- Club Type Cards -->
+        <div class="row g-4"    >
+            <div class="col-12 col-md-4 text-center">
+<img class="img_our_service" src="{% static 'club07_1-1.jpg' %}" alt="error" height="300px" width="100%">
+
+            <button value="sports_club" class="btn btn-outline-dark mt-2 w-100" style="border: 1px solid rgb(236, 223, 195);">Sports Clubs</button>
+        </div>
+        <div class="col-12 col-md-4 text-center">
+<img class="img_our_service" src="{% static 'gift_city_club_3.png' %}" alt="error" height="300px" width="100%">
+
+
+            <button value="party_club" class="btn btn-outline-dark mt-2 w-100" style="border: 1px solid rgb(236, 223, 195);">Events Clubs</button>
+        </div>
+        <div class="col-12 col-md-4 text-center">
+<img class="img_our_service" src="{% static 'gift_city_club_9-1.png' %}" alt="error" height="300px" width="100%">
+
+
+            <button value="mix_club" class="btn btn-outline-dark mt-2 w-100" style="border: 1px solid rgb(236, 223, 195);">Mix Clubs</button>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

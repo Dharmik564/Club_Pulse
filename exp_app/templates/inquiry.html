@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Club Pulse</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/swiper.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="icon" href="{% static 'image/favicon.ico' %}" type="image/x-icon">
+
+<style>
+    @font-face {
+        font-family: 'Calibri';
+        src: url('{% static "fonts/Calibri.woff" %}') format('woff'),
+            url('{% static "fonts/Calibri.ttf" %}') format('truetype');
+    }
+
+    .abc {
+        background: url('{% static "image/header-bg.jpg" %}') no-repeat;
+    }
+
+    .btn:hover {
+            background: #9a28d7; /* Teal hover effect */
+            border-radius: 27px;
+            color: aliceblue;
+        }
+.spcer {
+    margin-top: 50px;
+}
+</style>
+
+<script type='text/javascript' src="{% static 'js/jquery.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/jquery.countdown.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/masonry.pkgd.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/swiper.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/jquery.collapsible.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/circle-progress.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/custom.js' %}"></script>
+</head>
+<body class="elements-page">
+
+<header class="site-header">
+    <div class="header-bar">
+        <div class="container-fluid">
+            <div class="row align-items-center" style="margin-right: 15px;">
+                <div class="col-10 col-lg-2 order-lg-1">
+                    <div class="site-branding">
+                        <div class="site-title">
+                            <img src="{% static 'image/logo_club_pulse_3.png' %}" alt="logo">
+                        </div><!-- .site-title -->
+                    </div><!-- .site-branding -->
+                </div><!-- .col -->
+
+                <div class="col-2 col-lg-7 order-3 order-lg-2">
+                    <nav class="site-navigation">
+                        <div class="hamburger-menu d-lg-none">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div><!-- .hamburger-menu -->
+
+                        <ul>
+                            <li><a href="{% url 'user_home' id %}">Home</a></li>
+                            <li><a href="{% url 'about' id %}">About</a></li>
+                            <li><a href="{% url 'club_list' id 'all' %}">Clubs</a></li>
+                            {% if id != 0 %}
+                                <li><a href="{% url 'my_history' id %}">My History</a></li>
+                            {% else %}
+                                <li><a href="{% url 'user_login' %}">My History</a></li>
+                            {% endif %}
+                            {% if id != 0 %}
+                                <li><a href="{% url 'contact' id %}">Contact</a></li>
+                            {% else %}
+                                <li><a href="{% url 'user_login' %}">Contact</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav><!-- .site-navigation -->
+                </div><!-- .col -->
+
+                <div class="col-lg-3 d-none d-lg-block order-2 order-lg-2">
+                    {% if id != 0 %}
+                    <div class="login-username" style="display: flex;">
+                        <span class="btn gradient-bg">{{ username }}</span>
+                        <a class="btn btn-logout " href="{% url 'main_page' %}" style="color: aliceblue; margin-left: 10px;">Logout</a>
+                    </div><!-- .login-username -->
+                    {% else %}
+                    <div class="login-username">
+                        <a class="btn gradient-bg" href="{% url 'login' %}">Login</a>
+                    </div><!-- .login-username -->
+                    {% endif %}
+                </div><!-- .col -->
+            </div><!-- .row -->
+        </div><!-- .container-fluid -->
+    </div><!-- .header-bar -->
+
+    <div class="page-header elements-page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <header class="entry-header">
+                        <h1 class="entry-title">Inquiry Form</h1>
+                    </header>
+                </div>
+            </div>
+        </div>
+    </div>
+</header><!-- .site-header -->
+    
+    <!-- Spacer to prevent content from being hidden under the fixed navbar -->
+    <div class="spacer"></div>
+
+    
+    <form method="post" action="" class="container">
+        {% csrf_token %}
+        <div class="d-flex justify-content-center">
+            <div class="form-container">
+                <p style="color: red;">{{ error }}</p>
+                <div class="mb-3 text-start">
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" id="name" name="name" class="form-control" value="{{ id.name }}" readonly>
+                </div>
+                <div class="mb-3 text-start">
+                    <label for="username" class="form-label">Username:</label>
+                    <input type="text" id="username" name="username" class="form-control" value="{{ id.username }}" readonly>
+                </div>
+                <div class="mb-3 text-start">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" id="email" name="email" class="form-control" value="{{ id.email }}" readonly>
+                </div>
+                <div class="mb-3 text-start">
+                    <label for="event_name" class="form-label">Event Name:</label>
+                    <input type="text" id="event_name" name="event_name" class="form-control" placeholder="Enter your event name" required>
+                </div>
+                <div class="mb-3 text-start">
+                    <label for="date" class="form-label">Date:</label>
+                    <input type="date" id="date" name="date" class="form-control" required>
+                </div>
+                <div class="mb-3 text-start">
+                    <label for="start_time" class="form-label">Start Time :</label>
+                    <input type="time" id="start_time" name="start_time" class="form-control" required>
+                </div>
+                <div class="container d-flex justify-content-center align-items-center" style="margin-top: 20px; margin-bottom: 20px;" required>
+                    <label for="time_slot" class="form-label" style="padding-right: 15px; padding-top: 10px;">Time Slot : </label>
+                    <select name="time_slot" id="time_slot" class="custom-select" required>
+                        <option value="" selected disabled>Select Time slot</option>
+                        <option value="1 hour">1 hour</option>
+                        <option value="2 hour">2 hour</option>
+                        <option value="3 hour">3 hour</option>
+                        <option value="4 hour">4 hour</option>
+                        <option value="5 hour">5 hour</option>
+                        <option value="6 hour">6 hour</option>
+                        <option value="Half Day">Half Day</option>
+                        <option value="Full Day">Full Day</option>
+                    </select>
+                </div>
+                <div class="mb-3 container d-flex justify-content-center align-items-center" style="margin-top: 20px; margin-bottom: 20px;" required>
+                    <label for="budget" class="form-label fw-bold" style="padding-right: 15px; padding-top: 10px;">Select Budget : </label>
+                    <select name="budget" id="budget" class="custom-select" required>
+                        <option value="" selected disabled>Select Budget Range</option>
+                        <option value="Less than 5,000">Less than ₹5,000</option>
+                        <option value="5,000 - 10,000">₹5,000 - ₹10,000</option>
+                        <option value="10,000 - 20,000">₹10,000 - ₹20,000</option>
+                        <option value="20,000 - 50,000">₹20,000 - ₹50,000</option>
+                        <option value="50,000 - 1,00,000">₹50,000 - ₹1,00,000</option>
+                        <option value="1,00,000 - 2,00,000">₹1,00,000 - ₹2,00,000</option>
+                        <option value="2,00,000+ (Premium Booking)">₹2,00,000+ (Premium Booking)</option>
+                        <option value="Flexible / Open Budget">Flexible / Open Budget</option>
+                    </select>
+                </div>
+                
+                {% if error %}                     
+                <p class="mt-3 text-danger">{{error}}</p>
+                {% endif %}
+                <a href="" class="inquiry_button"><button type="submit" class="btn btn-custom" style="margin-bottom: 50px;">Submit</button></a>
+                <div class="spacer"></div>
+            </div>
+        </div>
+    </form>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <figure class="footer-logo">
+                        <img src="{% static 'image/logo_club_pulse1_remove_bg.png' %}" alt="logo">
+                    </figure>
+    
+                    <nav class="footer-navigation">
+                        <ul  class="flex flex-wrap justify-content-center align-items-center">
+                            <li><a href="{% url 'user_home' id %}">Home</a></li>
+                            <li><a href="{% url 'club_list' id 'all' %}">Clubs</a></li>
+                            {% if id != 0 %}
+                                <li><a href="{% url 'my_history' id %}">My History</a></li>
+                            {% else %}
+                                <li><a href="{% url 'user_login' %}">My History</a></li>
+                            {% endif %}
+                            <li><a href="{% url 'about' id %}">About us</a></li>
+                            {% if id != 0 %}
+                                <li><a href="{% url 'contact' id %}">Contact</a></li>
+                            {% else %}
+                                <li><a href="{% url 'user_login' %}">Contact</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+    
+                    <div class="footer-social">
+                        <ul class="flex flex-wrap justify-content-center align-items-center">
+                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <!-- <li><a href="#"><i class="fa fa-twitter"></i></a></li> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <div class="back-to-top flex justify-content-center align-items-center">
+        <span><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1395 1184q0 13-10 23l-50 50q-10 10-23 10t-23-10l-393-393-393 393q-10 10-23 10t-23-10l-50-50q-10-10-10-23t10-23l466-466q10-10 23-10t23 10l466 466q10 10 10 23z"/></svg></span>
+    </div>
+    
+    <script type='text/javascript' src="{% static 'js/jquery.js' %}"></script>
+    <script type='text/javascript' src="{% static 'js/masonry.pkgd.min.js' %}"></script>
+    <script type='text/javascript' src="{% static 'js/jquery.collapsible.min.js' %}"></script>
+    <script type='text/javascript' src="{% static 'js/swiper.min.js' %}"></script>
+    <script type='text/javascript' src="{% static 'js/jquery.countdown.min.js' %}"></script>
+    <script type='text/javascript' src="{% static 'js/circle-progress.min.js' %}"></script>
+    <script type='text/javascript' src="{% static 'js/jquery.countTo.min.js' %}"></script>
+    <script type='text/javascript' src="{% static 'js/custom.js' %}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const statusCells = document.querySelectorAll(".table tbody td.status");
+    
+            statusCells.forEach(cell => {
+                const text = cell.textContent.trim().toLowerCase();
+                
+                if (text === "approved") {
+                    cell.classList.add("status-approved");
+                } else if (text === "rejected") {
+                    cell.classList.add("status-rejected");
+                } else if (text === "pending") {
+                    cell.classList.add("status-pending");
+                }
+            });
+        });
+    </script>
+    
+    </body>
+    </html>
+    

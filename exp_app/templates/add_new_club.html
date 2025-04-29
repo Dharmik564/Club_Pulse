@@ -1,0 +1,106 @@
+{% extends 'owner_base.html' %}
+{% block content %}
+{% load static %}
+<div class="container my-4">
+    <form method="post" enctype="multipart/form-data" action="{% url 'add_new_club' id %}">
+        {% csrf_token %}
+        <div class="card p-4 shadow">
+            <h1 class="text-center mb-4">Add New Club</h1>
+            {% if error %}
+                <div class="alert alert-danger text-center">{{ error }}</div>
+            {% endif %}
+
+            <div class="row">
+                <!-- Left Column (Labels) -->
+                <div class="col-md-6 col-12">
+                    <div class="mb-3">
+                        <label class="fw-bold">Club Owner Name:</label>
+                        <p>{{ name }}</p>
+                    </div>
+                    <div class="mb-3" style="margin-bottom: 20px !important;">
+                        <label class="fw-bold">Club Owner Mobile Number:</label>
+                        <p>{{ mobile_number }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Club Name:</label>
+                        <input class="form-control" type="text" name="club_name" placeholder="Enter Club Name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Club Profile Image:</label>
+                        <input class="form-control" type="file" name="club_profile_image" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Club Phone Number:</label>
+                        <input class="form-control" type="text" name="club_phone_number" placeholder="Enter Phone Number" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Club Email:</label>
+                        <input class="form-control" type="email" name="club_email" placeholder="Enter Email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Club Password:</label>
+                        <input class="form-control" type="password" name="club_password" placeholder="Enter Password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Club Description:</label>
+                        <textarea class="form-control" type="text" name="club_description" placeholder="Enter Description" required></textarea>
+                    </div>
+                </div>
+                
+                <!-- Right Column (Inputs) -->
+                <div class="col-md-6 col-12">
+                    <div class="mb-3">
+                        <label class="fw-bold">Club Owner Email:</label>
+                        <p>{{ email }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Type of Club (Category):</label>
+                        <div class="d-flex gap-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="club_category" value="Sports" required>
+                                <label class="form-check-label">Sports</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="club_category" value="Event">
+                                <label class="form-check-label">Event</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="club_category" value="Mix">
+                                <label class="form-check-label">Mix</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Club Address:</label>
+                        <input class="form-control" type="text" name="club_address" placeholder="Enter Address" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Club City:</label>
+                        <input class="form-control" type="text" name="club_city" placeholder="Enter City" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Club State:</label>
+                        <input class="form-control" type="text" name="club_state" placeholder="Enter State" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Club Country:</label>
+                        <input class="form-control" type="text" name="club_country" placeholder="Enter Country" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Confirm Password:</label>
+                        <input class="form-control" type="password" name="club_confirm_password" placeholder="Confirm Password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Club Detailed Description:</label>
+                        <textarea class="form-control" name="club_detail_description" rows="3" placeholder="Enter Detailed Description" required></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <button class="btn btn-primary" type="submit">My Club</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

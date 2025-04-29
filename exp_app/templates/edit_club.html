@@ -1,0 +1,91 @@
+{% extends 'owner_base.html' %}
+{% block content %}
+{% load static %}
+<div class="container my-4">
+    <form method="post" enctype="multipart/form-data" action="{% url 'edit_club' id %}">
+        {% csrf_token %}
+        <div class="card p-4 shadow">
+            <h1 class="text-center mb-4">Edit Club</h1>
+            {% if error %}
+                <p style="color: red;">{{ error }}</p>
+            {% endif %}
+
+            <div class="row">
+                <!-- Left Column (Labels & Static Data) -->
+                <div class="col-md-6 col-12">
+                    <div class="mb-3">
+                        <label class="fw-bold">Club Owner Name:</label>
+                        <p>{{ name }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Club Owner Mobile Number:</label>
+                        <p>{{ mobile_number }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Password:</label>
+                        <input class="form-control" type="password" name="club_password" placeholder="Confirm Password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Club Name:</label>
+                        <select class="form-select" name="club_id" id="club_id">
+                            <option value="" selected disabled>Select Club</option>
+                            {% for club in club %}
+                            <option value="{{ club.id }}">{{ club.club_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Club Profile Image:</label>
+                        <input class="form-control" type="file" name="club_profile_image">
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Club Phone Number:</label>
+                        <input class="form-control" type="text" name="club_phone_number" placeholder="Enter Phone Number">
+                    </div>
+                </div>
+                
+                <!-- Right Column (Inputs & Editable Fields) -->
+                <div class="col-md-6 col-12">
+                    <div class="mb-3">
+                        <label class="fw-bold">Club Owner Email:</label>
+                        <p>{{ email }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Type of Club (Category):</label>
+                        <div class="d-flex gap-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="club_category" value="Sports">
+                                <label class="form-check-label">Sports</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="club_category" value="Event">
+                                <label class="form-check-label">Event</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="club_category" value="Mix">
+                                <label class="form-check-label">Mix</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Confirm Password:</label>
+                        <input class="form-control" type="password" name="club_confirm_password" placeholder="Confirm Password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Club Description:</label>
+                        <textarea class="form-control" type="text" name="club_description" placeholder="Enter Description"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Club Detailed Description:</label>
+                        <textarea class="form-control" name="club_detail_descr" rows="3" placeholder="Enter Detailed Description"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <button class="btn btn-primary" type="submit">Update Club</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

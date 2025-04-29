@@ -1,0 +1,76 @@
+{% extends 'owner_base.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-4">
+    <!-- Welcome Section -->
+    <div class="text-center p-4 rounded" style="border: 2px solid #ffe4c4; background-color: #ffe4c454;">
+        <h2>Welcome to {{club1.club_name}}!</h2>
+        <p class="text-dark fs-5">
+            We’re excited to have you here! Explore upcoming events, connect with members, and make the most of your club experience. Let’s build memories together!
+        </p>
+    </div>
+
+    <!-- Club Profile Image -->
+    <div class="text-center my-3">
+        <img src="{{ club1.club_profile_image.url }}" alt="Club Profile" class="img-fluid rounded" style="max-width: 100%;">
+    </div>
+
+    <!-- Description Section -->
+    <h4 class="text-center text-decoration-underline">Description</h4>
+    <div class="row my-3">
+        {% if single_club_i == None %}
+            <!-- Text Description -->
+            <div class=" col-md-12 p-3">
+                <p class="fs-5"><b>Category:</b> {{ club1.club_category }}</p>
+                <p class="fs-5" style="text-align: justify;">{{ club1.club_detail_description }}</p>
+            </div>
+        {% else %}
+            <!-- Text Description -->
+            <div class=" col-md-6 p-3">
+                <p class="fs-5"><b>Category:</b> {{ club1.club_category }}</p>
+                <p class="fs-5" style="text-align: justify;">{{ club1.club_detail_description }}</p>
+            </div>
+            <!-- Club Image -->
+            <div class=" col-md-6 text-center">
+                <img src="{{ single_club_i.club_image.url }}" alt="Club Image" class="img-fluid rounded">
+            </div>
+        {% endif %}
+    </div>
+
+    {% if single_club_i != None %}
+        <!-- Club Images Carousel -->
+        <h4 class="text-center text-decoration-underline">{{club1.club_name}} Images</h4>
+        <div id="demo" class="carousel slide my-3" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for i in club_i %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <img src="{{ i.club_image.url }}" alt="Club Image" class="d-block w-100" style="height: 500px;">
+                </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+    {% endif %}
+</div>
+
+    <!-- Contact & Address Section -->
+    <div class="p-3 text-light" style="background-color: #333;">
+        <div class="bg-dark text-center p-2">
+            <a href="mailto:{{ club1.club_email }}" class="text-light text-decoration-none">{{ club1.club_email }}</a>
+        </div>
+        <div class="p-3">
+            <a href="tel:+91{{ club1.club_phone }}" class="text-light text-decoration-none">Phone: {{ club1.club_phone }}</a>
+            <p>City: {{ club1.club_city }}</p>
+            <p>State: {{ club1.club_state }}</p>
+            <p>Country: {{ club1.club_country }}</p>
+            <p>Address: {{ club1.club_address }}</p>
+        </div>
+    </div>
+
+{% endblock %}
+   

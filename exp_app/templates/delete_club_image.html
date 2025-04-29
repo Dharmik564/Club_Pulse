@@ -1,0 +1,38 @@
+
+
+{% extends 'owner_base.html' %}
+{% load static %}
+{% block content %}
+    <h1 class="text-center">Delete Club Image</h1>
+    <div class="container mt-4 text-center">
+        <form method="post" enctype="multipart/form-data" action="{% url 'delete_club_image' id %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="clubs" class="form-label"><strong>Select an Image by id to Delete</strong></label>
+                <select name="clubs" id="clubs" class="form-select w-50 mx-auto">
+                    <option value="" selected disabled>Choose Image</option>
+                    {% for i in club_image_stored %}
+                        <option value="{{i.id}}">{{ i.id }} - {{ i.club.club_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-danger mt-3">Delete Image</button>
+        </form>
+    </div>
+    
+    <div class="container">
+        <div class="row justify-content-center">
+            {% for i in club_image_stored %}
+                <div class="card mb-4 shadow-lg" style="width: 350px; margin: 15px;">
+                    <div class="card-body text-center">
+                        <h3 class="mb-3">{{ i.club.club_name }}</h3>
+                        <img src="{{ i.club_image.url }}" alt="Club Image" class="img-fluid rounded"
+                             style="width: 100%; height: 250px; object-fit: cover;">
+                        <p class="mt-2">Image ID: <strong>{{ i.id }}</strong></p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

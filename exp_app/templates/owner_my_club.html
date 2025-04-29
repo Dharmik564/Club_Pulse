@@ -1,0 +1,60 @@
+{% extends 'owner_base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container mt-4">
+        <h1 class="text-center">My Club</h1>
+        
+        <!-- Action Buttons -->
+         <div style="display: flex; justify-content: space-between;">
+            <select name="club_filter" id="club_filter" onchange="location = this.value;" style="border-radius: 20px;">
+                <option value="" selected disabled>Select Category</option>
+                <option value="{% url 'owner_my_club' id 'Sports' %}">Sports</option>
+                <option value="{% url 'owner_my_club' id 'Event' %}">Event</option>
+                <option value="{% url 'owner_my_club' id 'Mix' %}">Mix</option>
+                <option value="{% url 'owner_my_club' id 'all' %}">All</option>
+            </select>    
+            <div class="d-flex justify-content-end mb-3 flex-wrap " style="align-content: center;">
+                <a href="{% url 'add_new_club' id %}" class="btn me-2" style="background-color: rgb(161, 135, 79);">+ Add New Club</a>
+                <a href="{% url 'edit_club' id %}" class="btn me-2" style="background-color: rgb(206, 169, 83);">Edit Club</a>
+                <a href="{% url 'add_club_image' id %}" class="btn me-2" style="background-color: rgb(201, 181, 136);">Add Club Image</a>
+                <a href="{% url 'delete_club_image' id %}" class="btn me-2" style="background-color: rgb(224, 117, 84);">Delete Club Image</a>
+                <a href="{% url 'delete_club' id %}" class="btn me-2" style="background-color: rgb(230, 61, 39);">Delete Club</a>
+            </div>
+        </div>
+        <p style="text-align: right;">
+            Total Clubs : {{ length_club }}
+        </p>
+        <!-- Club List -->
+        {% for i in club %}
+        <div class="card mb-4 shadow">
+            <div class="card-body">
+                <h3 class="text-center">{{ i.club_name }}</h3>
+                <div class="row align-items-center">
+                    <div class="row d-flex align-items-center ">
+                        <!-- Club Image -->
+                        <div class="col-md-4 text-center">
+                            <img src="{{ i.club_profile_image.url }}" alt="Club Image"
+                                 class="img-fluid rounded" style="max-width: 100%; height: auto;">
+                        </div>
+            
+                        <!-- Club Details (City & State) -->
+                        <div class="col-md-2 text-center text-md-start">
+                            <p><strong>Type:</strong> {{ i.club_category }}</p>
+                            <p><strong>City:</strong> {{ i.club_city }}</p>
+                            <p><strong>State:</strong> {{ i.club_state }}</p>
+                        </div>
+                        <!-- Club Description -->
+                        <div class="col-md-6">
+                            <p style="text-align: justify;">{{ i.club_description }}</p>
+                            <div class="text-center text-md-start mt-3">
+                                <a href="{% url 'owner_club' id i.club_email %}" class="btn" style="background-color: rgb(211, 153, 17);">Club</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

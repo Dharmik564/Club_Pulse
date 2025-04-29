@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="width: 100%; margin: 0%; background-color: #f8f3e3;">
+    <div class="box" style="display: flex; flex-direction: row;background-color: #ffd580;">
+        <img src="CMS_files/CMS-removebg-preview.png" width="70px" height="100%" alt="error">
+        <div class="box" style="height: fit-content; text-align: center; margin: 20px; text-align: center; font-family: fantasy;">
+            Club Pulse
+        </div>
+        <div style="display: flex; justify-content: space-evenly; width: 100%;">
+            <div class="box1" style="background-color: lightyellow;">
+                <a href="http://127.0.0.1:5500/Club%20Management%20System/home.html" style="text-decoration: none; color: black;">Home</a>
+            </div>
+            <div class="box1" style="background-color: lightyellow;">
+                <a href="http://127.0.0.1:5500/Club%20Management%20System/home.html" style="text-decoration: none; color: black;">Clubs List</a>
+            </div>
+            <div class="box1" style="background-color: lightyellow;">
+                <a href="http://127.0.0.1:5500/Club%20Management%20System/home.html" style="text-decoration: none; color: black;">Blogs</a>
+            </div>
+            <div class="box1" style="background-color: lightyellow;">
+                <a href="http://127.0.0.1:5500/Club%20Management%20System/about%20us.html" style="text-decoration: none; color: black;">About Us</a>
+            </div>
+            <div class="box1" style="background-color: lightyellow;">
+                <a href="http://127.0.0.1:5500/Club%20Management%20System/contact%20us.html" style="text-decoration: none; color: black;">Contact Us</a>
+            </div>
+        </div>
+    </div>
+    <div style="display: flex; gap: 50px;">
+        <img src="CMS_files/photo-1730818203797-897b2838105a.avif" alt="error" style="height: 500px; width: 600px; margin: 15px;">
+        <div class="box" style="width: 100%; margin: 15px; padding: 40px; font-size: x-large;">
+            <p>Experience the energy of [Your Club's Name]! </p><p>A hub for creativity, innovation, and meaningful connections.</p> Whether you're here to learn, lead, or simply explore, we provide the perfect environment to grow and shine. <p>Join us in shaping a vibrant future together!</p> <p></p>
+        </div>
+    </div>
+    <div style="display: flex; gap: 50px;">
+        <div class="box" style="width: 100%; margin: 15px; padding: 40px; font-size: x-large;">
+            <p>Experience the energy of [Your Club's Name]! </p><p>A hub for creativity, innovation, and meaningful connections.</p> Whether you're here to learn, lead, or simply explore, we provide the perfect environment to grow and shine. <p>Join us in shaping a vibrant future together!</p> <p></p>
+        </div>
+        <img src="CMS_files/photo-1730818203797-897b2838105a.avif" alt="error" style="height: 500px; width: 600px; margin: 15px;">
+    </div>
+    <div style="display: flex; gap: 50px;">
+        <img src="CMS_files/photo-1730818203797-897b2838105a.avif" alt="error" style="height: 500px; width: 600px; margin: 15px;">
+        <div class="box" style="width: 100%; margin: 15px; padding: 40px; font-size: x-large;">
+            <p>Experience the energy of [Your Club's Name]! </p><p>A hub for creativity, innovation, and meaningful connections.</p> Whether you're here to learn, lead, or simply explore, we provide the perfect environment to grow and shine. <p>Join us in shaping a vibrant future together!</p> <p></p>
+        </div>
+    </div>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+</body></html>

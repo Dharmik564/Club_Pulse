@@ -1,0 +1,88 @@
+ {% extends 'owner_base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <h1 class="mb-4" style="text-align: center; margin-top: 20px;">User Requests</h1>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered text-center">
+                <thead class="thead-dark">
+                    <tr>
+                        <!-- <th>No.</th> -->
+                        <th>Inquiry ID</th>
+                        <th>User Name</th>
+                        <th>Club Name</th>
+                        <th>Event Name</th>
+                        <th>Event Date</th>
+                        <th>Time Slot</th>
+                        <th>Budget</th>
+                        <th>Status</th>
+                        <th>Status Reason</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in inquiry %}
+                    <tr>
+                        <td>{{ i.id }}</td>
+                        <td>{{ i.user.username }}</td>
+                        <td>{{ i.club.club_name }}</td>
+                        <td>{{ i.event_name }}</td>
+                        <td>{{ i.date }}</td>
+                        <td>{{ i.time_slot }}</td>
+                        <td>{{ i.budget }}</td>
+                        {% if i.status == 'Pending' %}
+                        <td>
+                            <form method="post" action="{% url 'owner_user_request' id i.id %}">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <select class="form-select status-dropdown" name="status" required>
+                                        <option value="" selected disabled>Pending</option>
+                                        <option value="Approved">Approve</option>
+                                        <option value="Rejected">Reject</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 status-reason-container" style="display: none;">
+                                    <label class="form-label">Status Reason:</label>
+                                    <input type="text" class="form-control status-reason-input" name="status_reason">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </td>
+                        <td></td>
+                        {% else %}
+                            <td><p>{{ i.status }}</p></td>
+                            {% if i.status == 'Rejected' %}
+                                <td><p>{{ i.status_reason}}</p></td>
+                            {% else %}
+                                <td></td>
+                            {% endif %}
+                        {% endif %}
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="10" class="text-muted">No history available</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const dropdowns = document.querySelectorAll('.status-dropdown');
+            dropdowns.forEach(function (dropdown) {
+                dropdown.addEventListener('change', function () {
+                    const container = dropdown.closest('form');
+                    const reasonBox = container.querySelector('.status-reason-container');
+                    if (dropdown.value === 'Rejected') {
+                        reasonBox.style.display = 'block';
+                    } else {
+                        reasonBox.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+
+
+{% endblock %}

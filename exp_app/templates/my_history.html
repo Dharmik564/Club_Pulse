@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Club Pulse</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/swiper.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="icon" href="{% static 'image/favicon.ico' %}" type="image/x-icon">
+
+<style>
+    @font-face {
+        font-family: 'Calibri';
+        src: url('{% static "fonts/Calibri.woff" %}') format('woff'),
+            url('{% static "fonts/Calibri.ttf" %}') format('truetype');
+    }
+
+    .abc {
+        background: url('{% static "image/header-bg.jpg" %}') no-repeat;
+    }
+
+    /* Table Container */
+.table-responsive {
+    margin-top: 20px;
+}
+
+/* Table Styling */
+.table {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Table Header */
+.table thead {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: rgb(255, 255, 255);
+}
+
+.table thead th {
+    padding: 12px;
+    font-size: 16px;
+    text-transform: uppercase;
+    border: none;
+}
+
+/* Table Rows */
+.table tbody tr {
+    background-color: rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease-in-out;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Table Cells */
+.table tbody td {
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: black; /* Change text color to black */
+}
+
+/* Alternating Row Colors */
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* No History Message */
+.table tbody tr td.text-muted {
+    color: #a219be;
+    font-style: italic;
+}
+
+/* Rounded Corners */
+.table-bordered {
+    border-radius: 10px;
+}
+td{
+    font-weight: bold;
+    text-align: center;
+}
+/* Status Column Styling */
+.table tbody td:last-child {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Status Colors */
+.status {
+    font-weight: bold;
+}
+
+/* Approved (Green) */
+.status-approved {
+    color: #4CAF50; /* Green for approved status */
+}
+
+/* Rejected (Red) */
+.status-rejected {
+    color: #FF5252; /* Red for rejected status */
+}
+
+/* Pending (Orange) */
+.status-pending {
+    color: #FFA726; /* Orange for pending status */
+}
+
+.btn-logout:hover {
+            background: #9a28d7; /* Teal hover effect */
+            border-radius: 27px;
+            color: aliceblue;
+        }
+</style>
+
+<script type='text/javascript' src="{% static 'js/jquery.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/jquery.countdown.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/masonry.pkgd.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/swiper.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/jquery.collapsible.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/circle-progress.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/custom.js' %}"></script>
+</head>
+<body class="elements-page">
+
+<header class="site-header">
+    <div class="header-bar">
+        <div class="container-fluid">
+            <div class="row align-items-center" style="margin-right: 15px;">
+                <div class="col-10 col-lg-2 order-lg-1">
+                    <div class="site-branding">
+                        <div class="site-title">
+                            <img src="{% static 'image/logo_club_pulse_3.png' %}" alt="logo">
+                        </div><!-- .site-title -->
+                    </div><!-- .site-branding -->
+                </div><!-- .col -->
+
+                <div class="col-2 col-lg-7 order-3 order-lg-2">
+                    <nav class="site-navigation">
+                        <div class="hamburger-menu d-lg-none">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div><!-- .hamburger-menu -->
+
+                        <ul>
+                            <li><a href="{% url 'user_home' id %}">Home</a></li>
+                            <li><a href="{% url 'about' id %}">About</a></li>
+                            <li><a href="{% url 'club_list' id 'all' %}">Clubs</a></li>
+                            {% if id != 0 %}
+                                <li><a href="{% url 'my_history' id %}">My History</a></li>
+                            {% else %}
+                                <li><a href="{% url 'user_login' %}">My History</a></li>
+                            {% endif %}
+                            {% if id != 0 %}
+                                <li><a href="{% url 'contact' id %}">Contact</a></li>
+                            {% else %}
+                                <li><a href="{% url 'user_login' %}">Contact</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav><!-- .site-navigation -->
+                </div><!-- .col -->
+
+                <div class="col-lg-3 d-none d-lg-block order-2 order-lg-2">
+                    {% if id != 0 %}
+                    <div class="login-username" style="display: flex;">
+                        <span class="btn gradient-bg">{{ username }}</span>
+                        <a class="btn btn-logout " href="{% url 'main_page' %}" style="color: aliceblue; margin-left: 10px;">Logout</a>
+                    </div><!-- .login-username -->
+                    {% else %}
+                    <div class="login-username">
+                        <a class="btn gradient-bg" href="{% url 'login' %}">Login</a>
+                    </div><!-- .login-username -->
+                    {% endif %}
+                </div><!-- .col -->
+            </div><!-- .row -->
+        </div><!-- .container-fluid -->
+    </div><!-- .header-bar -->
+
+    <div class="page-header elements-page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <header class="entry-header">
+                        <h1 class="entry-title">History of Inquiry</h1>
+                    </header>
+                </div>
+            </div>
+        </div>
+    </div>
+</header><!-- .site-header -->
+    <div class="container mt-4">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered text-center">
+                <thead class="thead">
+                    <tr>
+                        <th>No.</th>
+                        <th>Club Name</th>
+                        <th>Event Name</th>
+                        <th>Event Date</th>
+                        <th>Time Slot</th>
+                        <th>Budget</th>
+                        <th>Status</th>
+                        <th>Payment Status</th>
+                        <th>Map</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in inq %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ i.club.club_name }}</td>
+                        <td>{{ i.event_name }}</td>
+                        <td>{{ i.date }}</td>
+                        <td>{{ i.time_slot }}</td>
+                        <td>{{ i.budget }}</td>
+
+                        {% if i.status == 'Approved' %}
+                            <td class="status status-approved" style="color: #4CAF50;">{{ i.status }}</td>
+                        {% elif i.status == 'Rejected' %}
+                            <td class="status status-rejected" style="color: #FF5252;">{{ i.status }} <br>{{i.status_reason}} </td>
+                        {% elif i.status == 'Pending' %}
+                            <td class="status status-pending" style="color: #FFA726;">{{ i.status }}</td>
+                        {% endif %}
+
+                        {% if i.status == 'Approved' %}
+                            {% if i.id in paid %}
+                                <td style="color: #4CAF50; font-weight: bold;">Paid</td>
+                                {% if 'Karnavati Club' in i.club.club_name %}
+                                    <td><a href="https://maps.app.goo.gl/h7fSfeWPd9D88WpW7" class="btn gradient-bg" target="_blank">View map</a></td>
+                                {% elif 'Rajpath' in i.club.club_name %}
+                                    <td><a href="https://maps.app.goo.gl/SDEBsSZjEiZoXz6g6" class="btn gradient-bg" target="_blank">View map</a></td>
+                                {% elif 'Gift City' in i.club.club_name %}
+                                    <td><a href="https://maps.app.goo.gl/XKtcZiZNN3NaNAcC6" class="btn gradient-bg" target="_blank">View map</a></td>
+                                {% elif 'Info City' in i.club.club_name %}
+                                    <td><a href="https://maps.app.goo.gl/vudMfJj1PcZ5NvKj8" class="btn gradient-bg" target="_blank">View map</a></td>
+                                {% elif 'club 07' in i.club.club_name %}
+                                    <td><a href="https://maps.app.goo.gl/8L5H3uMLUXtzfpug6" class="btn gradient-bg" target="_blank">View map</a></td>
+                                {% elif 'YMCA' in i.club.club_name %}
+                                    <td><a href="https://maps.app.goo.gl/fVhVtNqhgc11ewk79" class="btn gradient-bg" target="_blank">View map</a></td>
+                                {% endif %}
+                            {% else %}
+                                <td><a href="{% url 'payment' id i.id %}" class="btn gradient-bg">Pay</a></td>
+                                <td></td>
+                            {% endif %}
+                        {% else %}
+                            <td>Not Applicable</td>
+                            <td></td>
+                        {% endif %}
+
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="9" class="text-muted">No history available</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- <button id="showMapButton">Show Map</button> -->
+    <div id="mapContainer" style="width: 500px; height: 300px; display: none;"></div>
+
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMNy8KY1rBW3fU47XpLilmPcotG1NUht0" defer></script>
+
+    <script>
+      const mapContainer = document.getElementById('mapContainer');
+      const showMapButton = document.getElementById('showMapButton');
+      const mapLocation = { lat: 21.2015, lng: 72.8316 }; // Example: Ahmedabad, Gujarat
+
+  
+      function initMap() {
+        console.log("Map initialized."); // Log to confirm map initialization
+        const map = new google.maps.Map(mapContainer, {
+          zoom: 12, // Adjust zoom level as needed
+          center: mapLocation
+
+        });
+        const marker = new google.maps.Marker({
+          position: mapLocation,
+          map: map
+
+        });
+      }
+      showMapButton.addEventListener('click', function() {
+        mapContainer.style.display = 'block'; // Show the map container
+        console.log("Initializing map..."); // Log to confirm function call
+        initMap(); // Call the function to initialize and display the map
+      });
+    </script>
+    <div style="height: 120px"></div>
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <figure class="footer-logo">
+                    <img src="{% static 'image/logo_club_pulse1_remove_bg.png' %}" alt="logo">
+                </figure>
+
+                <nav class="footer-navigation">
+                    <ul  class="flex flex-wrap justify-content-center align-items-center">
+                        <li><a href="{% url 'user_home' id %}">Home</a></li>
+                        <li><a href="{% url 'club_list' id 'all' %}">Clubs</a></li>
+                        {% if id != 0 %}
+                            <li><a href="{% url 'my_history' id %}">My History</a></li>
+                        {% else %}
+                            <li><a href="{% url 'user_login' %}">My History</a></li>
+                        {% endif %}
+                        <li><a href="{% url 'about' id %}">About us</a></li>
+                        {% if id != 0 %}
+                            <li><a href="{% url 'contact' id %}">Contact</a></li>
+                        {% else %}
+                            <li><a href="{% url 'user_login' %}">Contact</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+
+                <div class="footer-social">
+                    <ul class="flex flex-wrap justify-content-center align-items-center">
+                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <!-- <li><a href="#"><i class="fa fa-twitter"></i></a></li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div class="back-to-top flex justify-content-center align-items-center">
+    <span><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1395 1184q0 13-10 23l-50 50q-10 10-23 10t-23-10l-393-393-393 393q-10 10-23 10t-23-10l-50-50q-10-10-10-23t10-23l466-466q10-10 23-10t23 10l466 466q10 10 10 23z"/></svg></span>
+</div>
+
+<script type='text/javascript' src="{% static 'js/jquery.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/masonry.pkgd.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/jquery.collapsible.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/swiper.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/jquery.countdown.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/circle-progress.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/jquery.countTo.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/custom.js' %}"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const statusCells = document.querySelectorAll(".table tbody td.status");
+
+        statusCells.forEach(cell => {
+            const text = cell.textContent.trim().toLowerCase();
+            
+            if (text === "approved") {
+                cell.classList.add("status-approved");
+            } else if (text === "rejected") {
+                cell.classList.add("status-rejected");
+            } else if (text === "pending") {
+                cell.classList.add("status-pending");
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

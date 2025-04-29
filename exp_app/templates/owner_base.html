@@ -1,0 +1,346 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMS Owner</title>
+    <style>
+        body {
+            background-color: #f0f8ff; /* Light background color */
+            color: #333333; /* Dark gray text color */
+            background-size: 100%;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        label, input, textarea {
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: darkcyan; /* Header color */
+        }
+
+        .navbar {
+            height: 70px;
+            display: flex; 
+            flex-direction: row;
+            position: fixed;
+            background: #2C3E50;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .navbar a {
+            color: #745f39; /* White text */
+            background-color: rgb(207, 198, 179);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .navbar a:hover {
+            background: rgb(236, 223, 195); /* Teal hover effect */
+            border-radius: 5px;
+        }
+
+        .navbar-brand {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .navbar-toggler {
+            background-color: #020100; /* White toggler for mobile */
+        }
+
+        .box {
+            height: 70px;
+            display: flex; 
+            flex-direction: column;
+            gap: 5px;
+            
+        }
+
+        .box-image{
+            display: flex; 
+            flex-direction: column;
+            gap: 5px; 
+        }
+
+        .box-ser{
+            display: flex; 
+            flex-direction: column;
+            gap: 5px; 
+            border: 2px solid rgb(236, 223, 195);
+            margin: 20px; 
+            border-radius: 20px;
+        }
+
+        .club_list_details {
+            display: flex; 
+            flex-direction: column; 
+            padding: 20px;
+            border: 2px solid rgb(236, 223, 195);
+            border-collapse: collapse;
+            border-left: none;
+            border-right: none;
+        }
+
+        .clubs_memloc {
+            display: flex;
+            flex-direction: column;
+            font-weight: bold;
+            font-style: oblique;
+            font: x-large;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            width: 50%;
+        }
+
+        .club_descr {
+            padding: 5px;
+            
+        }
+        .img_club {
+            border-radius: 50%;
+        }
+
+        .box1 {
+            margin-top: 20px;
+            background: transparent;
+        }                                         
+
+        .log_in {
+            background: transparent; 
+            border: none; 
+            padding: 0px; 
+            width: 50px;
+        }
+
+        .rating {
+            background-color: rgb(236, 223, 195);
+            color: #333333;
+            text-align: center;
+            padding: 5px;
+            margin: 20px 90px 20px 90px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-evenly;
+            font-family: cursive;
+        }
+
+        .our_serv {
+            width : 60%; 
+            padding-left: 40px;
+            font-family: 'Georgia', serif; 
+            color: #2F4030;
+            
+        }
+
+        .link {
+            text-decoration: none;
+            color: black;
+            border-radius: 3px;
+            padding: 2px; 
+            background-color: rgb(207, 198, 179);
+        }
+
+        .link:hover {
+            background-color: rgb(211, 190, 94);
+            padding: 2px;
+            
+        }
+
+        .nav_link {
+            text-decoration: none;
+            color: black;
+            border-radius: 3px;
+            padding: 2px; 
+        }
+        .nav_link:hover {
+            
+            border: 2px solid white;
+        }
+
+        .nav-link.active {
+            background-color: rgb(235, 233, 228) !important;  
+        }
+
+        .our_service_button {
+            border: 1px solid rgb(236, 223, 195);
+            border-radius: 5px;
+            padding: 5px;
+            margin-top: 10px;
+        }
+
+        .our_service_button:hover {
+            border: 1px solid rgb(236, 223, 195);
+            background-color: rgb(236, 223, 195);
+        }
+
+        
+
+
+        .img_our_service:hover {
+            transform:  scale(0.9);
+        }
+
+        @media only screen and (max-width: 600px) {
+            .our_serv {
+                width: 100%;
+                padding-left: 2px;
+                font-family: 'Georgia', serif; 
+                color: #2F4030;
+            }
+
+            .owner_home_image {
+                height: 300px;
+            }
+
+        }
+
+        .add_new_club {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 200px 20px 200px;                  
+            background-color: rgb(236, 223, 195);
+            border: 2px solid#2F4030;
+            padding: 30px 20px 20px 20px;
+        }
+
+        .add_new_club_fields {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            margin-top: auto;
+            padding: 10px;
+            margin-left: 10px;
+            
+        }
+
+        .new_club_input {
+            
+            margin-top: 4px;
+            margin-bottom: 4px;
+            border-radius: 10px;
+            border: 3px solid #ccc;
+        }
+
+        .confirm_password {
+            display: none;
+        }
+
+        .new_club_input_cf {
+            padding: 5px;
+            margin-top: 4px;
+            margin-bottom: 4px;
+            border-radius: 10px;
+            border: 3px solid #ccc;
+        }
+
+        .new_club_input_cf+span {
+            display: ruby-text;
+            color: red;
+        }
+
+        
+
+        @media (max-width: 775px) {
+            .desktop-profile {
+                display: none; /* Hide profile image and login button on larger screens */
+            }
+            .mobile-profile {
+                display: flex !important; /* Show inside the collapsed menu */
+                flex-direction: column;
+                align-items: center;
+                padding: 10px;
+            }
+        }
+        @media (min-width: 776px) {
+            .mobile-profile {
+                display: none; /* Hide mobile profile on large screens */
+            }
+        }
+        
+        .btn-logout {
+            color: #000;
+        }
+
+        .btn-logout:hover {
+            color: #020100;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        </style>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+<!-- Bootstrap JS (for navbar toggling) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body style="width: 100%; margin: 0%;">
+    <nav class="navbar navbar-expand-lg" style="background-color: rgb(207, 198, 179); position: fixed; width: 100%; top: 0; z-index: 1000; padding: 3px 10px;">
+        <div class="container-fluid">
+            <!-- Logo -->
+            
+                <img src="{% static 'image/logo_club_pulse_3.png' %}" class="navbar-brand d-flex align-items-center" width="70px" height="80px" alt="CMS Logo" style="border-radius: 25%;">
+
+    
+            <!-- Bootstrap Toggle Button (for small screens) -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <!-- Navigation Links -->
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav gap-5">  <!-- Added spacing between links -->
+                    <li class="nav-item">
+                        <a class="nav-link nav_link {% if 'owner_home' in request.path %}active{% endif %}" href="{% url 'owner_home' id %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav_link {% if 'owner_my_club' in request.path %}active{% endif %}" href="{% url 'owner_my_club' id 'all' %}">My Clubs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav_link {% if 'owner_user_request' in request.path %}active{% endif %}" href="{% url 'owner_user_request' id 0 %}">User Requests</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav_link {% if 'owner_analysis' in request.path %}active{% endif %}" href="{% url 'owner_analysis' id %}">Analysis</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav_link {% if 'owner_contact' in request.path %}active{% endif %}" href="{% url 'owner_contact' id %}">Contact</a>
+                    </li>
+                </ul>
+            </div>
+    
+            <!-- Profile Section -->
+            <!-- Profile for large screens -->
+            <div class="desktop-profile d-flex align-items-center ms-lg-3">
+                <img src="{{ profile_image.url }}" alt="Profile Image" width="50" height="50" class="rounded-circle">
+                <span class="ms-2 fs-6 fw-bold text-dark">{{ username }}</span>
+                <a class="btn btn-logout" href="{% url 'login' %}" style=" margin-left: 10px;">Logout</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Spacer to prevent content from being hidden under the fixed navbar -->
+    <div style="height: 70px;"></div>
+    
+
+    
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

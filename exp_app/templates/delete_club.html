@@ -1,0 +1,55 @@
+{% extends 'owner_base.html' %}
+{% load static %}
+{% block content %}
+    <h1 class="text-center">Delete Club</h1>
+    <div class="container mt-4 text-center">
+        <form method="post" enctype="multipart/form-data" action="{% url 'delete_club' id %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="club_email" class="form-label"><strong>Select an Image by id to Delete</strong></label>
+                <select name="club_email" id="club_email" class="form-select w-50 mx-auto">
+                    <option value="" selected disabled>Choose Club</option>
+                    {% for i in club %}
+                        <option value="{{i.club_email}}">{{ i.club_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-danger mt-3">Delete Club</button>
+        </form>
+    </div>
+    
+    <p style="text-align: right;">
+        Total Clubs : {{ length_club }}
+    </p>
+
+    {% for i in club %}
+        <div class="card mb-4 shadow">
+            <div class="card-body">
+                <h3 class="text-center">{{ i.club_name }}</h3>
+                <div class="row align-items-center">
+                    <div class="row d-flex align-items-center ">
+                        <!-- Club Image -->
+                        <div class="col-md-4 text-center">
+                            <img src="{{ i.club_profile_image.url }}" alt="Club Image"
+                                 class="img-fluid rounded" style="max-width: 100%; height: auto;">
+                        </div>
+            
+                        <!-- Club Details (City & State) -->
+                        <div class="col-md-2 text-center text-md-start">
+                            <p><strong>City:</strong> {{ i.club_city }}</p>
+                            <p><strong>State:</strong> {{ i.club_state }}</p>
+                        </div>
+                        <!-- Club Description -->
+                        <div class="col-md-6">
+                            <p style="text-align: justify;">{{ i.club_description }}</p>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

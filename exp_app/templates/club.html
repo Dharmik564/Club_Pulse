@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Club Pulse</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/swiper.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .btn:hover {
+                background: #9a28d7; /* Teal hover effect */
+                border-radius: 27px;
+                color: aliceblue;
+            }
+        .club-description {
+            font-size: 1.25rem; /* Increased font size */
+        }
+    </style>
+
+    <script type='text/javascript' src="{% static 'js/jquery.js' %}"></script>
+    <script type='text/javascript' src="{% static 'js/jquery.countdown.min.js' %}"></script>
+    <script type='text/javascript' src="{% static 'js/masonry.pkgd.min.js' %}"></script>
+    <script type='text/javascript' src="{% static 'js/swiper.min.js' %}"></script>
+    <script type='text/javascript' src="{% static 'js/jquery.collapsible.min.js' %}"></script>
+    <script type='text/javascript' src="{% static 'js/circle-progress.min.js' %}"></script>
+    <script type='text/javascript' src="{% static 'js/custom.js' %}"></script>
+</head>
+<body class="contact-page">
+<header class="site-header">
+    <div class="header-bar">
+        <div class="container-fluid">
+            <div class="row align-items-center" style="margin-right: 15px;">
+                <div class="col-10 col-lg-2 order-lg-1">
+                    <div class="site-branding">
+                        <div class="site-title">
+                            <img src="{% static 'image/logo_club_pulse_3.png' %}" alt="logo">
+                        </div><!-- .site-title -->
+                    </div><!-- .site-branding -->
+                </div><!-- .col -->
+
+                <div class="col-2 col-lg-7 order-3 order-lg-2">
+                    <nav class="site-navigation">
+                        <div class="hamburger-menu d-lg-none">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div><!-- .hamburger-menu -->
+
+                        <ul>
+                            <li><a href="{% url 'user_home' id %}">Home</a></li>
+                            <li><a href="{% url 'about' id %}">About</a></li>
+                            <li><a href="{% url 'club_list' id 'all' %}">Clubs</a></li>
+                            {% if id != 0 %}
+                                <li><a href="{% url 'my_history' id %}">My History</a></li>
+                            {% else %}
+                                <li><a href="{% url 'user_login' %}">My History</a></li>
+                            {% endif %}
+                            {% if id != 0 %}
+                                <li><a href="{% url 'contact' id %}">Contact</a></li>
+                            {% else %}
+                                <li><a href="{% url 'user_login' %}">Contact</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav><!-- .site-navigation -->
+                </div><!-- .col -->
+
+                <div class="col-lg-3 d-none d-lg-block order-2 order-lg-2">
+                    {% if id != 0 %}
+                    <div class="login-username" style="display: flex;">
+                        <span class="btn gradient-bg">{{ username }}</span>
+                        <a class="btn btn-logout " href="{% url 'main_page' %}" style="color: aliceblue; margin-left: 10px;">Logout</a>
+                    </div><!-- .login-username -->
+                    {% else %}
+                    <div class="login-username">
+                        <a class="btn gradient-bg" href="{% url 'login' %}">Login</a>
+                    </div><!-- .login-username -->
+                    {% endif %}
+                </div><!-- .col -->
+            </div><!-- .row -->
+        </div><!-- .container-fluid -->
+    </div><!-- .header-bar -->
+
+    <div class="page-header events-page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <header class="entry-header">
+                        <h1 class="entry-title">{{ club1.club_name }}</h1>
+                    </header>
+                </div>
+            </div>
+        </div>
+    </div>
+</header><!-- .site-header -->
+
+<div class="container mt-4">
+    <!-- Welcome Section -->
+    <div class="text-center p-4 rounded" style="border: 2px solid #ffe4c4; background-color: #ffe4c454;">
+        <h2>Welcome to {{club1.club_name}}!</h2>
+        <p class="text-dark fs-5">
+            We’re excited to have you here! Explore upcoming events, connect with members, and make the most of your club experience. Let’s build memories together!
+        </p>
+    </div>
+
+    <!-- Club Profile Image -->
+    <div class="text-center my-3">
+        <img src="{{ club1.club_profile_image.url }}" alt="Club Profile" class="img-fluid rounded" style="max-width: 100%;">
+    </div>
+
+    <!-- Description Section -->
+    <h4 class="text-center text-decoration-underline">Description</h4>
+    <div class="row my-3">
+        {% if single_club_i == None %}
+            <!-- Text Description -->
+            <div class=" col-md-12 p-3">
+                <p class="club-description"><b>Category:</b> {{ club1.club_category }}</p>
+                <p class="club-description" style="text-align: justify;">{{ club1.club_detail_description }}</p>
+            </div>
+        {% else %}
+            <!-- Text Description -->
+            <div class=" col-md-6 p-3">
+                <p class="club-description"><b>Category:</b> {{ club1.club_category }}</p>
+                <p class="club-description" style="text-align: justify;">{{ club1.club_detail_description }}</p>
+            </div>
+            <!-- Club Image -->
+            <div class=" col-md-6 text-center">
+                <img src="{{ single_club_i.club_image.url }}" alt="Club Image" class="img-fluid rounded">
+            </div>
+        {% endif %}
+        </div>
+        {% if id != 0 %}
+            <div style="display: flex; justify-content: center; margin: 10px; padding: 5px;">
+                <a href="{% url 'inquiry_form' id c_email %}" class="inquiry_button"><button type="button" class="btn">Inquiry</button></a>
+            </div>
+        {% else %}
+            <div style="display: flex; justify-content: center; margin: 10px; padding: 5px;">
+                <a href="{% url 'user_login' %}" class="inquiry_button"><button type="button" class="btn">Inquiry</button></a>
+            </div>
+        {% endif %}
+        
+    {% if single_club_i != None %}
+        <!-- Club Images Swiper -->
+        <h4 class="text-center text-decoration-underline">{{club1.club_name}} Images</h4>
+        <div class="swiper-container my-3">
+            <div class="swiper-wrapper">
+                {% for i in club_i %}
+                <div class="swiper-slide">
+                    <img src="{{ i.club_image.url }}" alt="Club Image" class="d-block w-100" style="height: 500px;">
+                </div>
+                {% endfor %}
+            </div><!-- .swiper-wrapper -->
+
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+
+            <!-- Add Navigation -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div><!-- .swiper-container -->
+    {% endif %}
+</div>
+
+    <!-- Contact & Address Section -->
+    <div class="p-3 text-light" style="background-color: #333;">
+        <div class="bg-dark text-center p-2">
+            <p> Main site of the club : <a href="http://giftcityclub.com" class="text-light text-decoration-none" >giftcityclub.com</a></p>
+        </div>
+        <div class="p-3">
+            <a href="mailto:{{ club1.club_email }}" class="text-light text-decoration-none">Mail : {{ club1.club_email }}</a> <br>
+            <a href="tel:+91{{ club1.club_phone }}" class="text-light text-decoration-none">Phone: {{ club1.club_phone }}</a>
+            <p>City: {{ club1.club_city }}</p>
+            <p>State: {{ club1.club_state }}</p>
+            <p>Country: {{ club1.club_country }}</p>
+            <p>Address: {{ club1.club_address }}</p>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <figure class="footer-logo">
+                        <img src="{% static 'image/logo_club_pulse_3.png' %}" alt="logo">
+                    </figure>
+    
+                    <nav class="footer-navigation">
+                        <ul class="flex flex-wrap justify-content-center align-items-center">
+                            <li><a href="{% url 'user_home' id %}">Home</a></li>
+                            <li><a href="{% url 'about' id %}">About</a></li>
+                            <li><a href="{% url 'club_list' id 'all' %}">Clubs</a></li>
+                            {% if id != 0 %}
+                                <li><a href="{% url 'my_history' id %}">My History</a></li>
+                            {% else %}
+                                <li><a href="{% url 'user_login' %}">My History</a></li>
+                            {% endif %}
+                            {% if id != 0 %}
+                                <li><a href="{% url 'contact' id %}">Contact</a></li>
+                            {% else %}
+                                <li><a href="{% url 'user_login' %}">Contact</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+    
+                    <div class="footer-social">
+                        <ul class="flex flex-wrap justify-content-center align-items-center">
+                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <!-- <li><a href="#"><i class="fa fa-twitter"></i></a></li> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <div class="back-to-top flex justify-content-center align-items-center">
+        <span><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1395 1184q0 13-10 23l-50 50q-10 10-23 10t-23-10l-393-393-393 393q-10 10-23 10t-23-10l-50-50q-10-10-10-23t10-23l466-466q10-10 23-10t23 10l466 466q10 10 10 23z"/></svg></span>
+    </div>
+    
+    <script type='text/javascript' src="{% static 'js/jquery.js' %}"></script>
+    <script type='text/javascript' src="{% static 'js/masonry.pkgd.min.js' %}"></script>
+    <script type='text/javascript' src="{% static 'js/jquery.collapsible.min.js' %}"></script>
+    <script type='text/javascript' src="{% static 'js/swiper.min.js' %}"></script>
+    <script type='text/javascript' src="{% static 'js/jquery.countdown.min.js' %}"></script>
+    <script type='text/javascript' src="{% static 'js/circle-progress.min.js' %}"></script>
+    <script type='text/javascript' src="{% static 'js/jquery.countTo.min.js' %}"></script>
+    <script type='text/javascript' src="{% static 'js/custom.js' %}"></script>
+
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
+    
+    </body>
+    </html>

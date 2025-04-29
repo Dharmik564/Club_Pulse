@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Club Pulse</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/swiper.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<style>
+    .abc {
+        background: url('{% static "image/header-bg.jpg" %}') no-repeat;
+    }
+
+    .btn-logout:hover {
+            background: #9a28d7; /* Teal hover effect */
+            border-radius: 27px;
+            color: aliceblue;
+        }
+</style>
+
+<script type='text/javascript' src="{% static 'js/jquery.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/jquery.countdown.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/masonry.pkgd.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/swiper.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/jquery.collapsible.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/circle-progress.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/custom.js' %}"></script>
+
+</head>
+<body>
+<header class="site-header">
+    <div class="header-bar">
+        <div class="container-fluid">
+            <div class="row align-items-center" style="margin-right: 15px;">
+                <div class="col-10 col-lg-2 order-lg-1">
+                    <div class="site-branding">
+                        <div class="site-title">
+                            <img src="{% static 'image/logo_club_pulse_3.png' %}" alt="logo">
+                        </div><!-- .site-title -->
+                    </div><!-- .site-branding -->
+                </div><!-- .col -->
+
+                <div class="col-2 col-lg-7 order-3 order-lg-2">
+                    <nav class="site-navigation">
+                        <div class="hamburger-menu d-lg-none">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div><!-- .hamburger-menu -->
+
+                        <ul>
+                            <li><a href="{% url 'user_home' id %}">Home</a></li>
+                            <li><a href="{% url 'about' id %}">About</a></li>
+                            <li><a href="{% url 'club_list' id 'all' %}">Clubs</a></li>
+                            {% if id != 0 %}
+                                <li><a href="{% url 'my_history' id %}">My History</a></li>
+                            {% else %}
+                                <li><a href="{% url 'user_login' %}">My History</a></li>
+                            {% endif %}
+                            {% if id != 0 %}
+                                <li><a href="{% url 'contact' id %}">Contact</a></li>
+                            {% else %}
+                                <li><a href="{% url 'user_login' %}">Contact</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav><!-- .site-navigation -->
+                </div><!-- .col -->
+
+                <div class="col-lg-3 d-none d-lg-block order-2 order-lg-2">
+                    {% if id != 0 %}
+                    <div class="login-username" style="display: flex;">
+                        <span class="btn gradient-bg">{{ username }}</span>
+                        <a class="btn btn-logout " href="{% url 'main_page' %}" style="color: aliceblue; margin-left: 10px;">Logout</a>
+                    </div><!-- .login-username -->
+                    {% else %}
+                    <div class="login-username">
+                        <a class="btn gradient-bg" href="{% url 'login' %}">Login</a>
+                    </div><!-- .login-username -->
+                    {% endif %}
+                </div><!-- .col -->
+            </div><!-- .row -->
+        </div><!-- .container-fluid -->
+    </div><!-- .header-bar -->
+
+    <div class="swiper-container hero-slider">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide abc" data-date="2018/05/01">
+                <div class="hero-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col flex flex-column justify-content-center">
+                                <div class="entry-header">
+                                    
+                                    <h2 class="entry-title">Find & Join the Best Clubs!<br><span class="entry-header-span">Your perfect club is just a click away!</span></h2>
+                                </div><!--- .entry-header -->
+
+                            </div><!-- .col -->
+                        </div><!-- .container -->
+                    </div><!-- .hero-content -->
+                </div><!-- .swiper-slide -->
+            </div><!-- .swiper-wrapper -->
+
+            <div class="swiper-slide abc" data-date="2019/05/01">
+                <div class="hero-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col flex flex-column justify-content-center">
+                                <div class="entry-header">
+                                    <h2 class="entry-title">Register & Manage Your Club! <br><span class="entry-header-span">Grow your community with ease!</span></h2>
+                                </div><!--- .entry-header -->
+
+                                
+                            </div><!-- .col -->
+                        </div><!-- .container -->
+                    </div><!-- .hero-content -->
+                </div><!-- .swiper-slide -->
+            </div><!-- .swiper-wrapper -->
+
+            {% if id == 0 %}
+            <div class="swiper-slide abc" data-date="2020/05/01">
+                <div class="hero-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col flex flex-column justify-content-center">
+                                <div class="entry-header">
+                                    
+
+                                    <h2 class="entry-title">Explore Clubs & Connect! <br><span class="entry-header-span">Discover clubs that match your passion!</span></h2>
+                                </div><!--- .entry-header -->
+
+                                
+                            </div><!-- .col -->
+                        </div><!-- .container -->
+                    </div><!-- .hero-content -->
+                </div><!-- .swiper-slide -->
+            </div><!-- .swiper-wrapper -->
+            {% endif %}
+
+            <div class="swiper-slide abc" data-date="2019/05/01">
+                <div class="hero-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col flex flex-column justify-content-center">
+                                <div class="entry-header">
+                                    <h2 class="entry-title">Smart Club Management! <br><span class="entry-header-span">Handle members, updates, and more!</span></h2>
+                                </div><!--- .entry-header -->
+
+                                
+                            </div><!-- .col -->
+                        </div><!-- .container -->
+                    </div><!-- .hero-content -->
+                </div><!-- .swiper-slide -->
+            </div><!-- .swiper-wrapper -->
+
+            <div class="swiper-slide abc" data-date="2019/05/01">
+                <div class="hero-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col flex flex-column justify-content-center">
+                                <div class="entry-header">
+                                    <h2 class="entry-title">Join or register your club now! <br><span class="entry-header-span">Join or register your club now!</span></h2>
+                                </div><!--- .entry-header -->
+
+                                
+                            </div><!-- .col -->
+                        </div><!-- .container -->
+                    </div><!-- .hero-content -->
+                </div><!-- .swiper-slide -->
+            </div><!-- .swiper-wrapper -->
+        </div>
+
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+
+        <!-- Add Arrows -->
+        <div class="swiper-button-next flex justify-content-center align-items-center">
+            <span><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1171 960q0 13-10 23l-466 466q-10 10-23 10t-23-10l-50-50q-10-10-10-23t10-23l393-393-393-393q-10-10-10-23t10-23l50-50q10-10 23-10t23 10l466 466q10 10 10 23z"/></svg></span>
+        </div>
+
+        <div class="swiper-button-prev flex justify-content-center align-items-center">
+            <span><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1203 544q0 13-10 23l-393 393 393 393q10 10 10 23t-10 23l-50 50q-10 10-23 10t-23-10l-466-466q-10-10-10-23t10-23l466-466q10-10 23-10t23 10l50 50q10 10 10 23z"/></svg></span>
+        </div>
+    </div><!-- .swiper-container -->
+</header><!-- .site-header -->
+
+
+<div class="homepage-info-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-4 col-lg-5">
+                <figure>
+                    <img src="{% static 'image/logo_club_pulse1.png' %}" alt="logo">
+                </figure>
+            </div>
+
+            <div class="col-12 col-md-8 col-lg-7">
+                <header class="entry-header">
+                    <h2 class="entry-title">What is Club Pulse and why choose our services?</h2>
+                </header>
+
+                <div class="entry-content">
+                    <p>Club Pulse is the perfect platform for users to explore and join a variety of clubs effortlessly. With an easy-to-use interface, users can browse through a diverse range of clubs, find the ones that match their interests, and connect with like-minded people. Our platform ensures a seamless experience, making club discovery and engagement more accessible and enjoyable.</p>
+                </div>
+
+                <footer class="entry-footer">
+                    {% if id == 0 %}
+                    <a href="{% url 'user_registration' %}" class="btn gradient-bg">Register Now</a>
+                    {% endif %}
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="homepage-featured-events">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="featured-events-wrap flex flex-wrap justify-content-between">
+                    <div class="event-content-wrap positioning-event-1">
+                        <figure>
+                            <a href="{% url 'club' id 'club@karnavaticlub.com' %}"><img src="{% static 'karnavati_club_364x402.jpg' %}" alt="1"></a>
+                        </figure>
+                        
+                        <header class="entry-header">
+                            <h3 class="entry-title">Karnavati Club</h3>
+                        </header>
+                    </div>
+
+                    <div class="event-content-wrap positioning-event-2">
+                        <figure>
+                            <a href="{% url 'club' id 'info@giftcityclub.com' %}"><img src="{% static 'gift_city_club_8_799x894.png' %}" alt=""></a>
+                        </figure>
+
+                        <header class="entry-header">
+                            <h3 class="entry-title">Gift City Club</h3>
+                        </header>
+                    </div>
+
+                    <div class="event-content-wrap positioning-event-3">
+                        <figure>
+                            <a href="{% url 'club' id 'rajpath@rajpathclub.com' %}"><img src="{% static 'rajpath_club_8_751x855.png' %}" alt=""></a>
+                        </figure>
+
+                        <header class="entry-header">
+                            <h3 class="entry-title">Rajpath Club</h3>
+                        </header>
+                    </div>
+
+                    <div class="event-content-wrap positioning-event-4 half">
+                        <figure>
+                            <a href="{% url 'club_list' id 'Sports' %}"><img src="{% static 'image/check-sport-clubs.png' %}" height="164" width="164" alt=""></a>
+                        </figure>
+                    </div>
+
+                    <div class="event-content-wrap positioning-event-5 half">
+                        <figure>
+                            <a href="{% url 'club_list' id 'all' %}"><img src="{% static 'image/check-all-clubs.png' %}" alt=""></a>
+                        </figure>
+                    </div>
+
+                    <div class="event-content-wrap positioning-event-6 half">
+                        <figure>
+                            <a href="{% url 'club_list' id 'Event' %}"><img src="{% static 'image/Event-club.png' %}" alt=""></a>
+                        </figure>
+                    </div>
+
+                    <div class="event-content-wrap positioning-event-7">
+                        <figure>
+                            <a href="{% url 'club' id 'info@ymcaic.com' %}"><img src="{% static 'YMCA_2.png' %}" alt="" height="263" width="285"></a>
+                        </figure>
+
+                        <header class="entry-header">
+                            <h3 class="entry-title">YMCA Club</h3>
+                        </header>
+                    </div>
+
+                    <div class="event-content-wrap positioning-event-8">
+                        <figure>
+                            <a href="{% url 'club' id 'info@giftcityclub.com' %}"><img src="{% static 'gift_city_club_7_1209x1334.png' %}" alt="1"></a>
+                        </figure>
+
+                        <header class="entry-header">
+                            <h3 class="entry-title">Gift City Club</h3>
+                        </header>
+                    </div>
+
+                    <div class="event-content-wrap positioning-event-9">
+                        <figure>
+                            <a href="{% url 'club_list' id 'Sports' %}"><img src="{% static 'image/sport-bg-crop.jpg' %}" alt="">
+                        </figure>
+
+                        <header class="entry-header">
+                            <h3 class="entry-title">Sports Clubs</h3></a>
+                        </header>
+                    </div>
+
+                    <div class="event-content-wrap positioning-event-10 half">
+                        <figure>
+                            <a href="{% url 'club_list' id 'Mix' %}"><img src="{% static 'image/summer-festival.jpg' %}" alt="">
+                        </figure>
+
+                        <header class="entry-header">
+                            <h3 class="entry-title" style="background-color: rgb(219, 166, 20); margin-right: 15px;">Sport and Event Both Clubs</h3></a>
+                        </header>
+                    </div>
+
+                    <div class="event-content-wrap positioning-event-11 half">
+                        <figure>
+                            <img src="{% static 'image/autumn.jpg' %}" alt="">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="homepage-next-events">
+    <div class="container">
+        <div class="row">
+            <div class="next-events-section-header">
+                <h2 class="entry-title">Type Of Clubs</h2>
+                <p>We offer three exciting types of clubs tailored to match your interests and lifestyle. Whether you're looking for 
+                    the adrenaline of Sports Clubs, the vibrant energy of Party/Events/Functions Clubs, or a perfect combination with our 
+                    Mixed Clubs, we have something for everyone.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="next-event-wrap">
+                    <figure>
+                        <img class="img_our_service" src="{% static 'club07_1-1.jpg' %}" alt="error" height="300px" width="100%">
+
+                        <div class="event-rating">8.9</div>
+                    </figure>
+
+                    <header class="entry-header">
+                        <h3 class="entry-title">Sports Clubs</h3>
+                    </header>
+
+                    <div class="entry-content">
+                        <p>Stay active with top-notch sports facilities for tennis, football, cricket, and more. Train, compete, and enjoy the game with a passionate community.</p>
+                    </div>
+
+                    <footer class="entry-footer">
+                        <a href="{% url 'club_list' id 'Sports' %}">See Now</a>
+                    </footer>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="next-event-wrap">
+                    <figure>
+                        <img class="img_our_service" src="{% static 'gift_city_club_3.png' %}" alt="error" height="300px" width="100%"> 
+
+                        <div class="event-rating">7.9</div>
+                    </figure>
+
+                    <header class="entry-header">
+                        <h3 class="entry-title">Events Clubs</h3>
+                    </header>
+
+                    <div class="entry-content">
+                        <p>Host unforgettable events with stunning venues, premium services, and elegant settings for weddings, parties, and corporate gatherings.</p>
+                    </div>
+
+                    <footer class="entry-footer">
+                        <a href="{% url 'club_list' id 'Event' %}">See Now</a>
+                    </footer>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="next-event-wrap">
+                    <figure>
+                        <img class="img_our_service" src="{% static 'gift_city_club_9-1.png' %}" alt="error" height="300px" width="100%">
+
+                        <div class="event-rating">9.9</div>
+                    </figure>
+
+                    <header class="entry-header">
+                        <h3 class="entry-title">Mix Clubs</h3>
+                    </header>
+
+                    <div class="entry-content">
+                        <p>Enjoy a perfect mix of sports, leisure, dining, and entertainment—all in one exclusive club for a premium lifestyle.</p>
+                    </div>
+
+                    <footer class="entry-footer">
+                        <a href="{% url 'club_list' id 'Mix' %}">See Now</a>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<img src="{% static 'image/upcoming-events-bg.jpg' %}" alt="" height="200px" width="100%" style="margin: 0px;">
+
+<div class="newsletter-subscribe">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <header class="entry-header">
+                    <h2 class="entry-title">Subscribe to our newsletter to get the latest trends & news</h2>
+                    <p>Join our database NOW!</p>
+                </header>
+
+                <div class="newsletter-form">
+                    <form class="flex flex-wrap justify-content-center align-items-center" action="{% url 'contact' id %}" method="post">
+                        {% csrf_token %}
+                        <div class="col-md-12 col-lg-3">
+                            <input type="text" placeholder="Name" name="name" required>
+                        </div>
+
+                        <div class="col-md-12 col-lg-6">
+                            <input type="email" placeholder="Your e-mail" name="email" required>
+                        </div>
+
+                        <div class="col-md-12 col-lg-3">
+                            <input class="btn gradient-bg" type="submit" value="Subscribe" name="submit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <figure class="footer-logo">
+                    <img src="{% static 'image/logo_club_pulse_3.png' %}" alt="logo">
+                </figure>
+
+                <nav class="footer-navigation">
+                    <ul class="flex flex-wrap justify-content-center align-items-center">
+                        <li><a href="{% url 'user_home' id %}">Home</a></li>
+                        <li><a href="{% url 'about' id %}">About</a></li>
+                        <li><a href="{% url 'club_list' id 'all' %}">Clubs</a></li>
+                        {% if id != 0 %}
+                            <li><a href="{% url 'my_history' id %}">My History</a></li>
+                        {% else %}
+                            <li><a href="{% url 'user_login' %}">My History</a></li>
+                        {% endif %}
+                        {% if id != 0 %}
+                            <li><a href="{% url 'contact' id %}">Contact</a></li>
+                        {% else %}
+                            <li><a href="{% url 'user_login' %}">Contact</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+
+
+                <div class="footer-social">
+                    <ul class="flex flex-wrap justify-content-center align-items-center">
+                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <!-- <li><a href="#"><i class="fa fa-twitter"></i></a></li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div class="back-to-top flex justify-content-center align-items-center">
+    <span><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1395 1184q0 13-10 23l-50 50q-10 10-23 10t-23-10l-393-393-393 393q-10 10-23 10t-23-10l-50-50q-10-10-10-23t10-23l466-466q10-10 23-10t23 10l466 466q10 10 10 23z"/></svg></span>
+</div>
+
+<script type='text/javascript' src="{% static 'js/jquery.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/masonry.pkgd.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/jquery.collapsible.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/swiper.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/jquery.countdown.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/circle-progress.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/jquery.countTo.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/custom.js' %}"></script>
+
+</body>
+</html>
+ 

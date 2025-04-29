@@ -1,0 +1,23 @@
+{% extends 'owner_base.html' %}
+{% load static %}
+{% block content %}
+    <h1 style="text-align: center;">Analysis</h1>
+    <div class="rating">
+        <div class="box1">
+            <p>{{ user_count }}</p>
+            <p>User of Website</p>
+        </div>
+        <div class="box1">
+            <p>{{ subscriber_count }}</p>
+            <p>Subscriber Count</p>
+        </div>
+        <div class="box1">
+            <p >{{ club_count }}</p>
+            <p>Your Clubs</p>
+        </div>
+        <div class="box1">
+            <p>{{ inquiry_count }}</p>
+            <p>Happy Customers(Inquiries)</p>
+        </div>
+    </div>
+{% endblock %}
